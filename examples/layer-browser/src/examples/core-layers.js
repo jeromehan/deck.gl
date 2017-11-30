@@ -322,7 +322,40 @@ const PointCloudLayerExample = {
   }
 };
 
-const LineLayerMetersExample = {
+const PathMarkerExampleMeterData = new Array(1).fill(true).map(
+  f => ({
+    path: [
+      [8584.484798702775, 6742.5945553739575],
+      [2908.5139320879325, 429.453672569738]
+    ],
+    direction: {forward: Math.random() >= 0.5, backward: Math.random() >= 0.5}
+  })
+);
+
+const PathLayerMetersExample = {
+  layer: PathLayer,
+  getData: () => PathMarkerExampleMeterData,
+  props: {
+    id: 'path-outline-layer-meter',
+    opacity: 1.0,
+    getColor: f => [255, 0, 0],
+    getZLevel: f => 0,
+    getWidth: f => 10,
+    widthMinPixels: 1,
+    pickable: false,
+    strokeWidth: 5,
+    widthScale: 10,
+    autoHighlight: false,
+    highlightColor: [255, 255, 255, 255],
+    sizeScale: 200,
+    rounded: false,
+    getMarkerPercentages: () => [],
+    coordinateSystem: COORDINATE_SYSTEM.METER_OFFSETS,
+    coordinateOrigin: dataSamples.positionOrigin
+  }
+};
+
+const LineLayerMillimetersExample = {
   layer: LineLayer,
   getData: () => dataSamples.meterLines,
   props: {
@@ -335,7 +368,7 @@ const LineLayerMetersExample = {
   }
 };
 
-const PathLayerMetersFilteredExample = {
+const PathLayerMillimetersFilteredExample = {
   layer: PathLayer,
   getData: () => dataSamples.meterPathsFiltered,
   props: {
@@ -351,7 +384,7 @@ const PathLayerMetersFilteredExample = {
   }
 };
 
-const PathLayerMetersUnfilteredExample = {
+const PathLayerMillimetersUnfilteredExample = {
   layer: PathLayer,
   getData: () => dataSamples.meterPaths,
   props: {
@@ -399,7 +432,7 @@ const ScatterplotLayer64PerfExample = (id, getData) => ({
 
 /* eslint-disable quote-props */
 export default {
-  'Core Layers': {
+  'Core Layers - LngLat': {
     'GeoJsonLayer': GeoJsonLayerExample,
     'GeoJsonLayer (Extruded)': GeoJsonLayerExtrudedExample,
     PolygonLayer: PolygonLayerExample,
@@ -415,11 +448,12 @@ export default {
     HexagonLayer: HexagonLayerExample
   },
 
-  'Meter Offsets': {
+  'Core Layers - Meter Offsets': {
     'PointCloudLayer': PointCloudLayerExample,
-    'LineLayer (Small Feature)': LineLayerMetersExample,
-    'PathLayer (Small Filtered)': PathLayerMetersFilteredExample,
-    'PathLayer (Small Unfiltered)': PathLayerMetersUnfilteredExample
+    'Path Layer (Meters)': PathLayerMetersExample,
+    'PathLayer (Millimeters Filtered)': PathLayerMillimetersFilteredExample,
+    'PathLayer (Millimeters Unfiltered)': PathLayerMillimetersUnfilteredExample,
+    'LineLayer (Millimeters)': LineLayerMillimetersExample
   },
 
   'Performance Tests': {
