@@ -80,19 +80,22 @@ bool dash_isFragInGap() {
 void main(void) {
   // if joint is rounded, test distance from the corner
   if (jointType > 0.0 && vMiterLength > 0.0 && length(vCornerOffset) > 1.0) {
-    gl_FragColor = vec4(0., 1., 0., 1.);
-    return;
-    // discard;
+    // Enable to debug joints
+    // gl_FragColor = vec4(0., 1., 0., 1.);
+    // return;
+    discard;
   }
   if (jointType == 0.0 && vMiterLength > miterLimit) {
-    gl_FragColor = vec4(0., 0., 1., 1.);
-    return;
-    // discard;
+    // Enable to debug joints
+    // gl_FragColor = vec4(0., 0., 1., 1.);
+    // return;
+    discard;
   }
   if (vColor.a == 0.0 || dash_isFragInGap()) {
-    gl_FragColor = vec4(0., 1., 1., 1.);
-    return;
-    // discard;
+    // Enable to debug joints
+    // gl_FragColor = vec4(0., 1., 1., 1.);
+    // return;
+    discard;
   }
   gl_FragColor = vColor;
 

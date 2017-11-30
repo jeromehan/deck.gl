@@ -322,24 +322,13 @@ const PointCloudLayerExample = {
   }
 };
 
-const PathMarkerExampleMeterData = new Array(1).fill(true).map(
-  f => ({
-    path: [
-      [8584.484798702775, 6742.5945553739575],
-      [2908.5139320879325, 429.453672569738]
-    ],
-    direction: {forward: Math.random() >= 0.5, backward: Math.random() >= 0.5}
-  })
-);
-
 const PathLayerMetersExample = {
   layer: PathLayer,
-  getData: () => PathMarkerExampleMeterData,
+  getData: () => dataSamples.meterPaths,
   props: {
     id: 'path-outline-layer-meter',
     opacity: 1.0,
     getColor: f => [255, 0, 0],
-    getZLevel: f => 0,
     getWidth: f => 10,
     widthMinPixels: 1,
     pickable: false,
@@ -357,20 +346,20 @@ const PathLayerMetersExample = {
 
 const LineLayerMillimetersExample = {
   layer: LineLayer,
-  getData: () => dataSamples.meterLines,
+  getData: () => dataSamples.milliMeterLines,
   props: {
     id: 'lineLayer',
     getColor: f => [Math.random() * 255, 0, 0],
     pickable: true,
     coordinateSystem: COORDINATE_SYSTEM.METER_OFFSETS,
-    coordinateOrigin: dataSamples.positionOrigin,
+    coordinateOrigin: dataSamples.milliMeterOrigin,
     strokeWidth: 20
   }
 };
 
 const PathLayerMillimetersFilteredExample = {
   layer: PathLayer,
-  getData: () => dataSamples.meterPathsFiltered,
+  getData: () => dataSamples.milliMeterPathsFiltered,
   props: {
     id: 'pathLayer-meters-filtered',
     opacity: 0.6,
@@ -380,13 +369,13 @@ const PathLayerMillimetersFilteredExample = {
     widthMinPixels: 1,
     pickable: true,
     coordinateSystem: COORDINATE_SYSTEM.METER_OFFSETS,
-    coordinateOrigin: dataSamples.positionOrigin
+    coordinateOrigin: dataSamples.milliMeterOrigin
   }
 };
 
 const PathLayerMillimetersUnfilteredExample = {
   layer: PathLayer,
-  getData: () => dataSamples.meterPaths,
+  getData: () => dataSamples.milliMeterPaths,
   props: {
     id: 'pathLayer-meters',
     opacity: 0.6,
@@ -396,7 +385,7 @@ const PathLayerMillimetersUnfilteredExample = {
     widthMinPixels: 1,
     pickable: true,
     coordinateSystem: COORDINATE_SYSTEM.METER_OFFSETS,
-    coordinateOrigin: dataSamples.positionOrigin
+    coordinateOrigin: dataSamples.milliMeterOrigin
   }
 };
 
@@ -451,9 +440,9 @@ export default {
   'Core Layers - Meter Offsets': {
     'PointCloudLayer': PointCloudLayerExample,
     'Path Layer (Meters)': PathLayerMetersExample,
-    'PathLayer (Millimeters Filtered)': PathLayerMillimetersFilteredExample,
-    'PathLayer (Millimeters Unfiltered)': PathLayerMillimetersUnfilteredExample,
-    'LineLayer (Millimeters)': LineLayerMillimetersExample
+    'PathLayer (Mm Filtered: Zoom Map)': PathLayerMillimetersFilteredExample,
+    'PathLayer (Mm Unfiltered: Zoom Map)': PathLayerMillimetersUnfilteredExample,
+    'LineLayer (Mm - Zoom Map)': LineLayerMillimetersExample
   },
 
   'Performance Tests': {
